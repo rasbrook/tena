@@ -26,7 +26,7 @@ function App() {
 
   return (
     <BrowserRouter>
-      <Header
+      {/* <Header
         mainstyle={{ overFlow: 'hidden' }}
         backgroundcolor={backgroundcolor}
         name={'Tenapedia'}
@@ -43,7 +43,7 @@ function App() {
         //Bottomofdropdown={<button style={{ textAlign: 'center', backgroundColor: `${seconderycolor}` }}>Donate</button>}
         CompanyColor={maincolor}
         pages={user ? ['Dashboard', 'My-Course', "Profile", 'Course'] : ['Dashboard', 'Course']}
-        hovereffectonnav={{ color: `${maincolor}`, scale: 1.2, fontWeight: 600 }} />
+        hovereffectonnav={{ color: `${maincolor}`, scale: 1.2, fontWeight: 600 }} />*/}
 
       {user ? <Routes>
         <Route path="/" element={<Home />} />

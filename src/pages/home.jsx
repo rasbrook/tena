@@ -15,6 +15,7 @@ import Coursebox from "../components/course";
 import { Link } from "react-router-dom";
 
 const Home = (props) => {
+    const [inprogress, setInprogress] = useState(true)
     const [user, setUser] = useState()
     const images = [i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i5, i6, i7]
     const [loading, setLoading] = useState(false)
@@ -49,11 +50,17 @@ const Home = (props) => {
 
 
     console.log(user)
+    if (inprogress) {
+        return <div style={{ backgroundColor: 'black', height: '100vh' }}>
+            <h1 style={{ textAlign: 'center', color: 'white', }}>Our website is under construction, We Are Preparing Big Things For Our Students,  Please Come Back A Month.</h1>
+        </div>
+    }
     if (loading) {
         return <>
             <h1>Loading</h1>
         </>
     }
+
     return (
 
         <div >
