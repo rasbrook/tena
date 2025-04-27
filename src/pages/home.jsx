@@ -7,6 +7,11 @@ import i4 from '../assets/student6.jpeg'
 import i5 from '../assets/student4.jpg'
 import i6 from '../assets/student5.jpg'
 import i7 from '../assets/student7.jpg'
+import i12 from '../assets/s1.jpg'
+import i11 from '../assets/s2.jpg'
+import i8 from '../assets/s3.jpg'
+import i9 from '../assets/s4.jpg'
+import i10 from '../assets/s5.jpg'
 import n1 from '../assets/nursing 2.png'
 import n2 from '../assets/nursing 3.png'
 import n3 from '../assets/nursing 4.png'
@@ -28,7 +33,7 @@ const Home = (props) => {
     const [f, setF] = useState()
     const [inprogress, setInprogress] = useState(false)
     const [user, setUser] = useState()
-    const images = [i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i5, i6, i7]
+    const images = [i5, i6, i7, i8, i9, i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i10, i11, i12]
     const [loading, setLoading] = useState(false)
     const [course, setCourse] = useState([])
     const get_course = async () => {
@@ -57,7 +62,7 @@ const Home = (props) => {
             setUser(sessionData);
         }
         setLoading(false)
-        const figure_list = [n1, n2, n3, n4, n5, n6, n7, n8]
+        const figure_list = [n1, n2, n3, n4, n5, n6, n7, n8, n9]
         const figure = figure_list[Math.floor(Math.random() * figure_list.length)]
         setF(figure)
 
@@ -85,14 +90,14 @@ const Home = (props) => {
 
                 <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', marginTop: 150, gap: 50 }}>
                     <div style={{ width: '80vw', minWidth: 400, maxWidth: 500 }}>
-                        <AutoScrollGalleryRight images={images} duration={100} />
+                        <AutoScrollGalleryRight images={images} duration={50} />
                     </div>
                     <img src={f} style={{ width: '90vw', maxWidth: 500 }} />
                 </div>
-                <div style={{ zIndex: 999, width: '40vw', margin: 20, marginTop: 100 }}>
+                {/* <div style={{ zIndex: 999, width: '40vw', margin: 20, marginTop: 100 }}>
                     <h1 style={{ color: maincolor, fontSize: 46 }}>Achieve Your Career Goals with Tenapedia </h1>
                     {user ? <></> : <motion.button whileHover={{ scale: 1.05, cursor: 'pointer' }} style={{ minWidth: 250, height: 50, alignSelf: 'center', border: 'none', fontSize: 16, padding: 15, borderRadius: 8, backgroundColor: maincolor, color: "white" }}><Link style={{ textDecoration: 'none', color: 'white' }} to={'/signup'}>Start Your 14 day free Trial</Link></motion.button>}
-                </div>
+                </div>*/}
             </div>
             <h1 style={{ textAlign: 'center' }}>Our website is under construction, We Are Preparing Big Things For Our Students,  Please Come Back A Month.</h1>
 
