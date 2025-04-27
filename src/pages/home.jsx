@@ -7,6 +7,16 @@ import i4 from '../assets/student6.jpeg'
 import i5 from '../assets/student4.jpg'
 import i6 from '../assets/student5.jpg'
 import i7 from '../assets/student7.jpg'
+import n1 from '../assets/nursing 2.png'
+import n2 from '../assets/nursing 3.png'
+import n3 from '../assets/nursing 4.png'
+import n4 from '../assets/nursing 5.png'
+import n9 from '../assets/nursing 6.png'
+import n5 from '../assets/nursing 7.png'
+import n6 from '../assets/nursing 9.png'
+import n7 from '../assets/nursing 12.png'
+import n8 from '../assets/nursing 11.png'
+
 import AutoScrollGalleryLeft from "../components/autoscrollgalleryleft";
 import AutoScrollGalleryRight from "../components/autoscrollgalleryright";
 import { maincolor } from "../components/constant/color";
@@ -15,7 +25,8 @@ import Coursebox from "../components/course";
 import { Link } from "react-router-dom";
 
 const Home = (props) => {
-    const [inprogress, setInprogress] = useState(true)
+    const [f, setF] = useState()
+    const [inprogress, setInprogress] = useState(false)
     const [user, setUser] = useState()
     const images = [i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i5, i6, i7]
     const [loading, setLoading] = useState(false)
@@ -46,7 +57,12 @@ const Home = (props) => {
             setUser(sessionData);
         }
         setLoading(false)
+        const figure_list = [n1, n2, n3, n4, n5, n6, n7, n8]
+        const figure = figure_list[Math.floor(Math.random() * figure_list.length)]
+        setF(figure)
+
     }, []);
+
 
 
     console.log(user)
@@ -66,14 +82,19 @@ const Home = (props) => {
         <div >
             <h1 style={{ fontSize: 50, marginTop: 100, position: 'absolute' }}>ጤና-ፒዲያ</h1>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
-                <div style={{ width: '50vw', marginTop: 150, minWidth: 400 }}>
-                    <AutoScrollGalleryRight images={images} duration={100} />
+
+                <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', marginTop: 150, gap: 50 }}>
+                    <div style={{ width: '80vw', minWidth: 400, maxWidth: 500 }}>
+                        <AutoScrollGalleryRight images={images} duration={100} />
+                    </div>
+                    <img src={f} style={{ width: '90vw', maxWidth: 500 }} />
                 </div>
                 <div style={{ zIndex: 999, width: '40vw', margin: 20, marginTop: 100 }}>
                     <h1 style={{ color: maincolor, fontSize: 46 }}>Achieve Your Career Goals with Tenapedia </h1>
                     {user ? <></> : <motion.button whileHover={{ scale: 1.05, cursor: 'pointer' }} style={{ minWidth: 250, height: 50, alignSelf: 'center', border: 'none', fontSize: 16, padding: 15, borderRadius: 8, backgroundColor: maincolor, color: "white" }}><Link style={{ textDecoration: 'none', color: 'white' }} to={'/signup'}>Start Your 14 day free Trial</Link></motion.button>}
                 </div>
             </div>
+            <h1 style={{ textAlign: 'center' }}>Our website is under construction, We Are Preparing Big Things For Our Students,  Please Come Back A Month.</h1>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 30 }}>
                 {course.map((i) => (

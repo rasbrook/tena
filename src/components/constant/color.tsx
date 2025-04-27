@@ -1,5 +1,5 @@
-export const maincolor = '#005CAF'
-export const seconderycolor = "#FABC09"
-export const Accent = "#00C49A"
-export const backgroundcolor = "#F5F5F5"
+export const maincolor = '#3A59D1'
+export const seconderycolor = "#3D90D7"
+export const Accent = "#7AC6D2"
+export const backgroundcolor = "#F1EFEC"
 export const fontColor = '#333333'
