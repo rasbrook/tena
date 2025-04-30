@@ -99,7 +99,7 @@ const Home = (props) => {
                     {user ? <></> : <motion.button whileHover={{ scale: 1.05, cursor: 'pointer' }} style={{ minWidth: 250, height: 50, alignSelf: 'center', border: 'none', fontSize: 16, padding: 15, borderRadius: 8, backgroundColor: maincolor, color: "white" }}><Link style={{ textDecoration: 'none', color: 'white' }} to={'/signup'}>Start Your 14 day free Trial</Link></motion.button>}
                 </div>*/}
             </div>
-            <h1 style={{ textAlign: 'center' }}>Our website is under construction, We Are Preparing Big Things For Our Students,  Please Come Back A Month.</h1>
+            <h1 style={{ textAlign: 'center' }}>We are preparing Big things for our students ! Our website is under construction. Please come back later.</h1>
 
             <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 30 }}>
                 {course.map((i) => (
