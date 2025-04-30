@@ -90,7 +90,7 @@ const Home = (props) => {
 
                 <div style={{ display: 'flex', flexWrap: 'wrap-reverse', alignItems: 'center', marginTop: 150, gap: 50 }}>
                     <div style={{ width: '80vw', minWidth: 400, maxWidth: 500 }}>
-                        <AutoScrollGalleryRight images={images} duration={50} />
+                        <AutoScrollGalleryRight images={images} duration={100} />
                     </div>
                     <img src={f} style={{ width: '90vw', maxWidth: 500 }} />
                 </div>
