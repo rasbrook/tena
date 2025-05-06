@@ -1,8 +1,10 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { motion } from "framer-motion";
-import { Facebook, Twitter, Instagram, Linkedin, Heart } from "lucide-react";
-import { Accent, backgroundcolor, fontColor } from "../constant/color";
+import { Facebook, Twitter, Instagram, Linkedin, Heart, Youtube } from "lucide-react";
+import { FaFontAwesome, FaFontAwesomeAlt, FaTelegramPlane } from "react-icons/fa";
+import { Accent, backgroundcolor, fontColor, maincolor, seconderycolor } from "./constant/color";
+
 
 interface FooterProps {
     socialLinks?: {
@@ -18,27 +20,28 @@ const Footer = ({
         facebook: "#",
         twitter: "#",
         instagram: "#",
-        linkedin: "#",
+        youtube: 'https://www.youtube.com/@TENAPEDIA'
     },
 }: FooterProps) => {
+
     const navigation = [
-        { name: "Home", href: "/" },
-        { name: "About", href: "/about-us" },
-        { name: "Stories", href: "/Stories" },
-        { name: "Contact", href: "/contact" },
+        { name: "Dashboard", href: "/" },
+        { name: "My-Course", href: "/My-Course" },
+        { name: "Profile", href: "/Profile" },
+        { name: "Course", href: "/Course" },
     ];
 
     const socialIcons = [
         { icon: Facebook, href: socialLinks.facebook },
         { icon: Twitter, href: socialLinks.twitter },
-        { icon: Instagram, href: socialLinks.instagram },
-        { icon: Linkedin, href: socialLinks.linkedin },
+        { icon: Youtube, href: socialLinks.youtube },
+
     ];
 
     return (
         <footer style={{
             width: '100vw',
-            backgroundColor: `${Accent}88`,
+            backgroundColor: `${backgroundcolor}`,
             justifyContent: 'center',
             justifyItems: 'center',
             alignSelf: 'center',
@@ -46,7 +49,7 @@ const Footer = ({
         }}>
             <div style={{
                 width: '100vw',
-                backgroundColor: `${Accent}88`,
+                backgroundColor: `${backgroundcolor}88`,
                 justifyContent: 'space-between',
                 justifyItems: 'center',
                 alignSelf: 'center',
@@ -68,12 +71,12 @@ const Footer = ({
                         <h3 style={{
                             fontSize: "1.5rem",
                             fontWeight: "bold",
-                            background: "linear-gradient(to right, #60a5fa, #9333ea)",
+                            background: `linear-gradient(to right,${maincolor} , ${seconderycolor})`,
                             WebkitBackgroundClip: "text",
                             WebkitTextFillColor: "transparent",
                             marginBottom: "1rem"
                         }}>
-                            Yekerestos Bet
+                            Tenapedia
                         </h3>
                         <p style={{
                             fontSize: "1rem",
@@ -81,8 +84,7 @@ const Footer = ({
                             marginBottom: "1rem",
                             maxWidth: "32rem"
                         }}>
-                            Empowering communities through sustainable development and
-                            positive change.
+                            The First Health e-Learning Platform in Ethiopia
                         </p>
                         <div style={{ display: "flex", gap: "1rem" }}>
                             {socialIcons.map((social, index) => (
@@ -93,11 +95,13 @@ const Footer = ({
                                     rel="noopener noreferrer"
                                     whileHover={{ scale: 1.1 }}
                                     whileTap={{ scale: 0.95 }}
-                                    style={{ color: "#9CA3AF" }}
+                                    style={{ color: fontColor }}
                                 >
                                     <social.icon style={{ height: "1.25rem", width: "1.25rem" }} />
                                 </motion.a>
                             ))}
+                            {/*<FaFontAwesomeAlt name="telegram" />*/}
+                            <FaTelegramPlane size={20} color={fontColor} />
                         </div>
                     </div>
 
@@ -121,7 +125,7 @@ const Footer = ({
                                         to={item.href}
                                         style={{
                                             fontSize: "1rem",
-                                            color: "#9CA3AF",
+                                            color: fontColor,
                                             textDecoration: "none",
                                             textAlign: 'start'
                                         }}
@@ -141,7 +145,7 @@ const Footer = ({
                             justifyItems: 'end',
                             fontSize: "1.125rem",
                             fontWeight: "600",
-                            color: "white",
+                            color: 'black',
                             marginBottom: "1rem"
                             , textAlign: 'end'
                         }}>
@@ -149,9 +153,9 @@ const Footer = ({
                         </h4>
                         <div style={{ display: "flex", flexDirection: "column", gap: "0.5rem" }}>
                             {/*<p style={{ fontSize: "1rem", color: "#9CA3AF", textAlign: 'end' }}>123 Impact Street</p>*/}
-                            <p style={{ fontSize: "1rem", color: "#9CA3AF", textAlign: 'end' }}>addis Abeba, Ethiopia</p>
-                            <p style={{ fontSize: "1rem", color: "#9CA3AF", textAlign: 'end' }}>contact@yekerestosbet.org</p>
-                            <p style={{ fontSize: "1rem", color: "#9CA3AF", textAlign: 'end' }}>+25190000000</p>
+                            <a href="tel:+251913577685"><p style={{ fontSize: "1rem", color: fontColor, textAlign: 'end' }}>Addis Abeba, Ethiopia</p></a>
+                            <a href="mailto:contact@tenapedia.com"><p style={{ fontSize: "1rem", color: fontColor, textAlign: 'end' }}>contact@tenapedia.com</p></a>
+                            <a href="tel:+251913577685"><p style={{ fontSize: "1rem", color: fontColor, textAlign: 'end' }}>+251913577685</p></a>
                         </div>
                     </div>
                 </div>
@@ -167,7 +171,7 @@ const Footer = ({
                         fontSize: "0.875rem",
                         color: "#9CA3AF"
                     }}>
-                        © {new Date().getFullYear()} Yekerestos Bet. Made with{" "}
+                        © {new Date().getFullYear()} Tenapedia. Made with{" "}
                         <Heart style={{
                             height: "1rem",
                             width: "1rem",

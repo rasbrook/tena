@@ -1,59 +1,60 @@
-import React from "react";
-import { maincolor } from "../components/constant/color";
+import React, { useEffect, useState } from "react";
+import { backgroundcolor, maincolor } from "../components/constant/color";
 import Coursebox from "../components/course";
+import { supabase } from "../../supabase";
 
 const Course = (props) => {
-    const [user, setUser] = useState()
-    const images = [i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i5, i6, i7]
-    const [loading, setLoading] = useState(false)
-    const [course, setCourse] = useState([])
-    const get_course = async () => {
-        setLoading(true)
+    const [user, setUser] = useState();
+    const [loading, setLoading] = useState(true);
+    const [modules, setModules] = useState([]);
 
-        let { data: Courses, error } = await supabase
-            .from('Courses')
-            .select('*')
-        console.log(Courses)
-        setCourse(Courses)
-        setLoading(false)
+    const getCourse = async () => {
+        try {
+            const { data, error } = await supabase
+                .from('Courses')
+                .select('*');
 
-    }
-    console.log(course)
+            if (error) throw error;
+
+            if (data && data.length > 0) {
+                setModules(data);
+                console.log(data);
+            }
+        } catch (error) {
+            console.error('Error fetching courses:', error);
+        } finally {
+            setLoading(false);
+        }
+    };
+
+
     useEffect(() => {
-        get_course()
+        getCourse();
+    }, []);
 
-
-    }, [])
     useEffect(() => {
-        setLoading(true)
         const session = localStorage.getItem('session');
         if (session) {
             const sessionData = JSON.parse(session);
             supabase.auth.setSession(sessionData.token);
             setUser(sessionData);
         }
-        setLoading(false)
     }, []);
 
+    console.log(user);
 
-    console.log(user)
     if (loading) {
-        return <>
-            <h1>Loading</h1>
-        </>
+        return <div>Loading...</div>;
     }
-    return (
-        <div style={{ backgroundColor: maincolor }}>
-            <div style={{ display: 'flex', flexWrap: 'wrap', columnGap: 30 }}>
-                {course.map((i) => (
-                    <div onClick={() => console.log(i.id)} key={i.id}>
-                        <Coursebox title={i.title} />
-                    </div>
 
-                ))}
-            </div>
+    return (
+        <div style={{ padding: '20px', display: 'flex', flexWrap: "wrap", gap: 10, marginTop: 100 }}>
+            {modules.map((module) => (
+                <Coursebox key={module.id} module={module} title={module.title} />
+            ))}
+
         </div>
     );
 };
 
-export default Course
+export default Course;
