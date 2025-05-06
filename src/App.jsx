@@ -39,7 +39,7 @@ function App() {
         middleelement={<div style={{ alignContent: 'center', alignItems: 'center' }}><input style={{ height: 20, backgroundColor: `${maincolor}55`, border: 'none', marginRight: 10, borderRadius: 20, padding: 10 }} /></div>}
         logo={logo}
         // bigmiddleelement={<div style={{ left: 0, width: 100 }}><input /></div>}
-        rightCornerComponent={<motion.button whileHover={{ scale: 1.05, cursor: 'pointer' }} style={{ minWidth: 70, height: 40, alignSelf: 'center', border: 'none', fontSize: 16, borderRadius: 8, backgroundColor: maincolor, color: "white", marginRight: 20 }}><Link style={{ textDecoration: 'none', color: 'white' }} to={'/signup'}>Log In</Link></motion.button>}
+        rightCornerComponent={user ? <><h1>profile</h1></> : <motion.button whileHover={{ scale: 1.05, cursor: 'pointer' }} style={{ minWidth: 70, height: 40, alignSelf: 'center', border: 'none', fontSize: 16, borderRadius: 8, backgroundColor: maincolor, color: "white", marginRight: 20 }}><Link style={{ textDecoration: 'none', color: 'white' }} to={'/signup'}>Log In</Link></motion.button>}
 
         dropdownstyle={{ justifyContent: 'center', backgroundColor: `white` }}
         //Bottomofdropdown={<button style={{ textAlign: 'center', backgroundColor: `${seconderycolor}` }}>Donate</button>}
