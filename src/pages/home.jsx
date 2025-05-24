@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { supabase } from "../../supabase";
+import { supabase, supabaseTeach } from "../../supabase";
 import i1 from '../assets/student.jpg'
 import i2 from '../assets/student2.jpeg'
 import i3 from '../assets/student3.jpg'
@@ -27,9 +27,11 @@ import AutoScrollGalleryRight from "../components/autoscrollgalleryright";
 import { maincolor } from "../components/constant/color";
 import { motion } from "framer-motion";
 import Coursebox from "../components/course";
-import { Link } from "react-router-dom";
+import { Link, useNavigate, useNavigation } from "react-router-dom";
 
 const Home = (props) => {
+    const nav = useNavigate()
+    const [content, setContent] = useState([])
     const [f, setF] = useState()
     const [inprogress, setInprogress] = useState(false)
     const [user, setUser] = useState()
@@ -47,9 +49,23 @@ const Home = (props) => {
         setLoading(false)
 
     }
+    const get_contents = async () => {
+        setLoading(true)
+
+        let { data: content, error } = await supabaseTeach
+            .from('content')
+            .select('*')
+        console.log(content)
+        console.log(error)
+        setContent(content)
+        setLoading(false)
+
+
+    }
     console.log(course)
     useEffect(() => {
         get_course()
+        get_contents()
 
 
     }, [])
@@ -109,6 +125,93 @@ const Home = (props) => {
 
                 ))}
             </div>
+
+            <div style={{ display: "flex", gap: 20, marginBottom: 200, flexWrap: 'wrap' }}>
+                {content.map((i) => (
+                    <div
+                        key={i.id}
+                        onClick={() => nav(`/Content/${i.id}`)}
+                        style={{
+                            display: "flex",
+                            flexDirection: "column",
+                            width: 600,
+                            cursor: "pointer",
+                            backgroundColor: `${maincolor}44`,
+                            borderRadius: 8,
+                            paddingBottom: 10,
+                            transition: "0.3s",
+                        }}
+                    >
+                        {/* Video Thumbnail */}
+                        <div
+                            style={{
+                                position: "relative",
+                                width: "100%",
+                                height: 300,
+                                borderRadius: 8,
+                                overflow: "hidden"
+                            }}
+                        >
+                            <video
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    objectFit: "cover",
+                                    borderRadius: 8,
+                                }}
+                                src={`https://fitzygwmvtezlixlvnmn.supabase.co/storage/v1/object/public/video//${i.Video}`}
+                                type="video/mp4"
+
+                            />
+                        </div>
+
+
+                        <div
+                            style={{
+                                display: "flex",
+                                alignItems: "center",
+                                marginTop: 10,
+                                paddingLeft: 10
+                            }}
+                        >
+                            {/* Mock Profile Image */}
+                            <div
+                                style={{
+                                    width: 40,
+                                    height: 40,
+                                    borderRadius: "50%",
+                                    backgroundColor: "#ddd",
+                                    marginRight: 10
+                                }}
+                            />
+
+                            {/* Video Name */}
+                            <h4
+                                style={{
+                                    fontSize: "18px",
+                                    fontWeight: "bold",
+                                    color: "#000"
+                                }}
+                            >
+                                {i.name}
+                            </h4>
+
+                        </div>
+                        <h6
+                            style={{
+                                fontSize: "18px",
+                                fontWeight: "bold",
+                                color: "#000",
+                                marginLeft: 10
+                            }}
+                        >
+                            {i.description}
+                        </h6>
+                    </div>
+                ))}
+            </div>
+
+
         </div>
 
     );

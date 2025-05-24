@@ -10,6 +10,7 @@ function SignUp() {
     const [loading, setLoading] = useState(false);
     const [message, setMessage] = useState('');
 
+
     const handleSignUp = async (event) => {
         event.preventDefault();
         setLoading(true);
@@ -25,6 +26,7 @@ function SignUp() {
         if (error) {
             setMessage(error.message);
         } else {
+            setcreateprofile(true)
             setMessage('Check your email for the confirmation link!');
         }
 
@@ -86,6 +88,12 @@ function SignUp() {
             cursor: 'not-allowed',
         },
     };
+    if (createprofile) {
+        return <div>
+                
+        </div>
+
+    }
 
     return (<div style={styles.container}>
         <h2 style={styles.title}>Sign Up</h2>
