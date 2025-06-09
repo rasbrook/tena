@@ -6,6 +6,7 @@ function FlashcardPage() {
     const [currentCardIndex, setCurrentCardIndex] = useState(0);
     const [showAnswer, setShowAnswer] = useState(false);
     const [selectedChoice, setSelectedChoice] = useState(null);
+    const [choice, setChoice] = useState([])
 
     // Fetch cards when component mounts
     const fetchCards = async () => {
@@ -21,10 +22,11 @@ function FlashcardPage() {
                 // Parse the choices and answer for each card
                 const parsedCards = data.map(card => ({
                     ...card,
-                    choices: JSON.parse(card.choices),
+                    choices: card.choices,
                     correctAnswer: card.answer
                 }));
                 setCards(parsedCards);
+
             }
         } catch (error) {
             console.error("Error fetching cards:", error);
@@ -33,6 +35,7 @@ function FlashcardPage() {
 
     useEffect(() => {
         fetchCards();
+        // setChoice(JSON.parse(cards[currentCardIndex]?.choice))
     }, []);
 
     const handleChoiceSelected = (choiceKey) => {
@@ -51,8 +54,9 @@ function FlashcardPage() {
     };
 
     const handleNextCard = () => {
+        setShowAnswer(false)
         setSelectedChoice(null);
-        setShowAnswer(false);
+        //setShowAnswer(false);
         setCurrentCardIndex((prev) => (prev + 1) % cards.length);
     };
 
@@ -77,7 +81,7 @@ function FlashcardPage() {
             </button>
         ));
     };
-
+    console.log()
     return (
         <div className="container" style={{ textAlign: 'center', marginTop: '100px' }}>
             <h1>Medical Flashcards</h1>
@@ -95,13 +99,26 @@ function FlashcardPage() {
                         <h3 style={{ textAlign: 'center', marginBottom: '20px' }}>
                             {cards[currentCardIndex]?.question}
                         </h3>
+                        <p style={{
+                            fontSize: '16px',
+                            fontWeight: 'bold',
+                            color: '#666',
+                            marginTop: '10px'
+                        }}>
+                            {cards[currentCardIndex]?.choice}
+                        </p>
 
                         {!showAnswer ? (
                             <div style={{ marginBottom: '20px' }}>
-                                {renderChoices()}
+                                <input />
+
+
+
+
                             </div>
                         ) : (
                             <div>
+
                                 <p style={{ fontSize: '18px', fontWeight: 'bold', color: '#333' }}>
                                     Explanation: {cards[currentCardIndex]?.explanation}
                                 </p>
@@ -111,11 +128,25 @@ function FlashcardPage() {
                                     color: '#666',
                                     marginTop: '10px'
                                 }}>
-                                    Correct Answer: {JSON.parse(cards[currentCardIndex]?.answer)}
+                                    Correct Answer: {cards[currentCardIndex]?.answer}
                                 </p>
                             </div>
                         )}
                     </div>
+                    <button
+                        onClick={() => setShowAnswer(true)}
+                        style={{
+                            padding: '10px 20px',
+                            fontSize: '16px',
+                            backgroundColor: '#4CAF50',
+                            color: 'white',
+                            border: 'none',
+                            borderRadius: '5px',
+                            cursor: 'pointer'
+                        }}
+                    >
+                        show answer
+                    </button>
 
                     <button
                         onClick={handleNextCard}
