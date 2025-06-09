@@ -7,6 +7,7 @@ function FlashcardPage() {
     const [showAnswer, setShowAnswer] = useState(false);
     const [selectedChoice, setSelectedChoice] = useState(null);
     const [choice, setChoice] = useState([])
+    const [userAnswer, setUserAnswer] = useState(null)
 
     // Fetch cards when component mounts
     const fetchCards = async () => {
@@ -54,6 +55,7 @@ function FlashcardPage() {
     };
 
     const handleNextCard = () => {
+        setUserAnswer(null)
         setShowAnswer(false)
         setSelectedChoice(null);
         //setShowAnswer(false);
@@ -110,11 +112,7 @@ function FlashcardPage() {
 
                         {!showAnswer ? (
                             <div style={{ marginBottom: '20px' }}>
-                                <input />
-
-
-
-
+                                <input maxLength={1} value={userAnswer} onChange={(e) => setUserAnswer(e.target.value)} />
                             </div>
                         ) : (
                             <div>
@@ -125,11 +123,23 @@ function FlashcardPage() {
                                 <p style={{
                                     fontSize: '16px',
                                     fontWeight: 'bold',
+                                    color: userAnswer.toLowerCase() !== cards[currentCardIndex]?.answer.toLowerCase() ? 'red' : 'green',
+                                    marginTop: '10px'
+
+                                }}>
+                                    Your Answer : {userAnswer}
+
+                                </p>
+                                <p style={{
+                                    fontSize: '16px',
+                                    fontWeight: 'bold',
                                     color: '#666',
                                     marginTop: '10px'
                                 }}>
+
                                     Correct Answer: {cards[currentCardIndex]?.answer}
                                 </p>
+                                <p>{userAnswer.toLowerCase() !== cards[currentCardIndex]?.answer.toLowerCase() ? "Incorrect" : "Correct"}</p>
                             </div>
                         )}
                     </div>
