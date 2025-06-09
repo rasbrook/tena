@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { supabaseTeach } from "../../supabase";
 import { maincolor, seconderycolor, Accent, backgroundcolor, fontColor } from "../components/constant/color";
 
@@ -7,6 +7,7 @@ const Content = () => {
     const { id } = useParams();
     const [loading, setLoading] = useState(true);
     const [content, setContent] = useState(null);
+    const nav = useNavigate()
 
     const getContent = async () => {
         let { data: content, error } = await supabaseTeach
@@ -78,9 +79,14 @@ const Content = () => {
 
             {/* Course Metadata */}
             <div style={{ marginTop: 20, fontSize: 14, color: Accent }}>
-                <p>📅 Created: {new Date(content.created_at).toLocaleDateString()}</p>
-                <p>📚 Course ID: {content.course_id}</p>
+                <p>📅 Created At: {new Date(content.created_at).toLocaleDateString()}</p>
+                {/*<p>📚 Course ID: {content.course_id}</p>*/}
                 <p>🎓 Instructor ID: {content.instructer_id}</p>
+            </div>
+
+
+            <div>
+                <button onClick={() => nav('/Content/questions/25')} style={{ padding: 10 }}>Go to Questions</button>
             </div>
         </div>
     );

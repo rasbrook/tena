@@ -13,6 +13,7 @@ import { motion } from "framer-motion"
 import Profile from "./pages/profile"
 import Footer from "./components/footer"
 import Content from "./pages/content"
+import FlashcardPage from "./pages/questions"
 
 
 function App() {
@@ -55,12 +56,16 @@ function App() {
         <Route path="/My-Course" element={<Mycourse />} />
         <Route path="/Course" element={<Course />} />
         <Route path="/Content/:id" element={<Content />} />
+        <Route path="/Content/questions/:id" element={<FlashcardPage />} />
         <Route path="/Profile" element={<Profile />} />
       </Routes> : <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/Profile" element={<Profile />} />
 
+
         <Route path="/signup" element={<SignUp />} />
+        <Route path="/Content/:id" element={<Content />} />
+        <Route path="/Content/questions/:id" element={<FlashcardPage />} />
         <Route path="/login" element={<Login />} />
         <Route path="/Course" element={<Course />} />
         <Route path="/Dashboard" element={<Home />} />
