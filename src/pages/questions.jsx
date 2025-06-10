@@ -7,7 +7,7 @@ function FlashcardPage() {
     const [showAnswer, setShowAnswer] = useState(false);
     const [selectedChoice, setSelectedChoice] = useState(null);
     const [choice, setChoice] = useState([])
-    const [userAnswer, setUserAnswer] = useState(null)
+    const [userAnswer, setUserAnswer] = useState('')
 
     // Fetch cards when component mounts
     const fetchCards = async () => {
@@ -55,7 +55,7 @@ function FlashcardPage() {
     };
 
     const handleNextCard = () => {
-        setUserAnswer(null)
+        setUserAnswer('')
         setShowAnswer(false)
         setSelectedChoice(null);
         //setShowAnswer(false);
