@@ -49,6 +49,7 @@ const Course = (props) => {
 
     return (
         <div style={{ padding: '20px', display: 'flex', flexWrap: "wrap", gap: 10, marginTop: 100 }}>
+
             {modules.map((module) => (
                 <Coursebox key={module.id} module={module} title={module.title} />
             ))}

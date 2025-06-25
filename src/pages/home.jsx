@@ -24,7 +24,7 @@ import n8 from '../assets/nursing 11.png'
 
 import AutoScrollGalleryLeft from "../components/autoscrollgalleryleft";
 import AutoScrollGalleryRight from "../components/autoscrollgalleryright";
-import { maincolor } from "../components/constant/color";
+import { maincolor, seconderycolor } from "../components/constant/color";
 import { motion } from "framer-motion";
 import Coursebox from "../components/course";
 import { Link, useNavigate, useNavigation } from "react-router-dom";
@@ -38,17 +38,19 @@ const Home = (props) => {
     const images = [i5, i6, i7, i8, i9, i1, i2, i3, i4, i5, i6, i7, i1, i2, i3, i4, i10, i11, i12]
     const [loading, setLoading] = useState(false)
     const [course, setCourse] = useState([])
+
     const get_course = async () => {
         setLoading(true)
 
         let { data: Courses, error } = await supabase
             .from('Courses')
             .select('*')
-        console.log(Courses)
+        console.log(Courses[0])
         setCourse(Courses)
         setLoading(false)
 
     }
+
     const get_contents = async () => {
         setLoading(true)
 
@@ -63,12 +65,16 @@ const Home = (props) => {
 
     }
     console.log(course)
+
+
     useEffect(() => {
         get_course()
         get_contents()
 
 
     }, [])
+
+
     useEffect(() => {
         setLoading(true)
         const session = localStorage.getItem('session');
@@ -87,11 +93,16 @@ const Home = (props) => {
 
 
     console.log(user)
+    console.log(course)
+
+
     if (inprogress) {
         return <div style={{ backgroundColor: 'black', height: '100vh' }}>
             <h1 style={{ textAlign: 'center', color: 'white', }}>Our website is under construction, We Are Preparing Big Things For Our Students,  Please Come Back A Month.</h1>
         </div>
     }
+
+
     if (loading) {
         return <>
             <h1>Loading</h1>
@@ -100,7 +111,7 @@ const Home = (props) => {
 
     return (
 
-        <div >
+        <div style={{ width: '90vw', overflow: 'hidden' }}>
             <h1 style={{ fontSize: 50, marginTop: 100, position: 'absolute' }}>ጤና-ፒዲያ</h1>
             <div style={{ display: 'flex', flexWrap: 'wrap' }}>
 
@@ -108,7 +119,7 @@ const Home = (props) => {
                     <div style={{ width: '80vw', minWidth: 400, maxWidth: 500 }}>
                         <AutoScrollGalleryRight images={images} duration={100} />
                     </div>
-                    <img src={f} style={{ width: '90vw', maxWidth: 500 }} />
+                    {/*<img src={f} style={{ width: '90vw', maxWidth: 500 }} />*/}
                 </div>
                 {/* <div style={{ zIndex: 999, width: '40vw', margin: 20, marginTop: 100 }}>
                     <h1 style={{ color: maincolor, fontSize: 46 }}>Achieve Your Career Goals with Tenapedia </h1>
@@ -126,20 +137,35 @@ const Home = (props) => {
                 ))}
             </div>
 
-            <div style={{ display: "flex", gap: 20, marginBottom: 200, flexWrap: 'wrap' }}>
+            <div style={{
+                display: "grid",
+                gridTemplateColumns: "repeat(auto-fill, minmax(300px, 1fr))",
+                gap: "2rem",
+                marginBottom: "2rem",
+                padding: "0 2rem"
+            }}>
                 {content.map((i) => (
                     <div
                         key={i.id}
                         onClick={() => nav(`/Content/${i.id}`)}
                         style={{
+                            position: "relative",
                             display: "flex",
                             flexDirection: "column",
-                            width: 600,
+                            aspectRatio: "1",
+                            border: "1px solid rgba(0,0,0,0.1)",
+                            borderRadius: "5px",
+                            //overflow: "hidden",
                             cursor: "pointer",
+                            transition: "all 0.3s ease",
+
+
                             backgroundColor: `${maincolor}44`,
-                            borderRadius: 8,
-                            paddingBottom: 10,
-                            transition: "0.3s",
+
+                            ":hover": {
+                                transform: "translateY(-5px)",
+                                boxShadow: "0 10px 20px rgba(0,0,0,0.1)",
+                            }
                         }}
                     >
                         {/* Video Thumbnail */}
@@ -147,69 +173,110 @@ const Home = (props) => {
                             style={{
                                 position: "relative",
                                 width: "100%",
-                                height: 300,
-                                borderRadius: 8,
-                                overflow: "hidden"
+                                height: "",
+                                paddingTop: "100%",
+                                borderRadius: "5px 5px 5px 5px",
+                                //overflow: "hidden"
+
                             }}
                         >
                             <video
                                 style={{
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
                                     width: "100%",
                                     height: "100%",
                                     objectFit: "cover",
-                                    borderRadius: 8,
                                 }}
                                 src={`https://fitzygwmvtezlixlvnmn.supabase.co/storage/v1/object/public/video//${i.Video}`}
                                 type="video/mp4"
-
                             />
-                        </div>
-
-
-                        <div
-                            style={{
-                                display: "flex",
-                                alignItems: "center",
-                                marginTop: 10,
-                                paddingLeft: 10
-                            }}
-                        >
-                            {/* Mock Profile Image */}
+                            {/* Add a semi-transparent overlay */}
                             <div
                                 style={{
-                                    width: 40,
-                                    height: 40,
-                                    borderRadius: "50%",
-                                    backgroundColor: "#ddd",
-                                    marginRight: 10
+                                    position: "absolute",
+                                    top: 0,
+                                    left: 0,
+                                    right: 0,
+                                    bottom: 0,
+                                    backgroundColor: "rgba(0,0,0,0.3)",
+                                    borderRadius: "5px 5px 5px 5px"
                                 }}
                             />
-
-                            {/* Video Name */}
-                            <h4
-                                style={{
-                                    fontSize: "18px",
-                                    fontWeight: "bold",
-                                    color: "#000"
-                                }}
-                            >
-                                {i.name}
-                            </h4>
-
                         </div>
-                        <h6
+
+                        {/* Content Section */}
+                        <div
                             style={{
-                                fontSize: "18px",
-                                fontWeight: "bold",
-                                color: "#000",
-                                marginLeft: 10
+                                padding: "1.5rem",
+                                display: "flex",
+                                flexDirection: "column",
+                                flex: 1,
+                                position: "relative",
+                                zIndex: 1,
+                                backgroundColor: "rgb(255, 255, 255)"  // White background
                             }}
                         >
-                            {i.description}
-                        </h6>
+                            {/* Dot and Title */}
+                            <div
+                                style={{
+                                    display: "flex",
+                                    alignItems: "center",
+                                    gap: "0.5rem",
+                                    position: "relative"
+
+                                }}
+                            >
+                                {/* Dot Symbol */}
+                                <div
+                                    style={{
+                                        width: "10px",
+                                        height: "10px",
+                                        borderRadius: "50%",
+
+                                        position: "absolute",
+                                        right: "1rem",
+                                        top: "1rem"
+                                    }}
+                                />
+
+                                {/* Title */}
+                                <h3
+                                    style={{
+                                        fontSize: "1.2rem",
+                                        fontWeight: "600",
+                                        color: "#000",  // Changed to pure black
+                                        margin: 0,
+
+                                        marginRight: "2rem",
+                                        zIndex: 999
+                                    }}
+                                >
+                                    {i.name}
+                                </h3>
+                            </div>
+
+                            {/* Description */}
+                            <p
+                                style={{
+                                    fontSize: "1rem",
+                                    color: "#000",  // Changed to pure black
+                                    marginTop: "0.5rem",
+                                    marginBottom: "1rem",
+                                    lineHeight: "1.5",
+                                    flex: 1,
+                                    zIndex: 999
+                                }}
+                            >
+                                {i.description}
+                            </p>
+                        </div>
                     </div>
                 ))}
             </div>
+
+
 
 
         </div>
